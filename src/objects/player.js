@@ -4,6 +4,11 @@ class Player {
 
     #speed
 
+    /**
+     *
+     * @param {Phaser.Scene} scene
+     * @param {number} speed
+     */
     constructor(scene, speed) {
         this.#cursor = scene.input.keyboard.createCursorKeys()
         this.#image = scene.add.image(scene.game.config.width * 0.5, scene.game.config.height * 0.5, 'mainatlas', 'char_squareYellow')
