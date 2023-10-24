@@ -1,0 +1,214 @@
+{
+    "frames": [
+        {
+            "filename": "char_squareYellow",
+            "frame": {"x":576, "y":0,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_squareRed",
+            "frame": {"x":576, "y":64,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_squarePurple",
+            "frame": {"x":576, "y":128,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_squareGreen",
+            "frame": {"x":576, "y":192,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_roundYellow",
+            "frame": {"x":576, "y":256,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_roundRed",
+            "frame": {"x":576, "y":320,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_roundPurple",
+            "frame": {"x":576, "y":384,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_roundGreen",
+            "frame": {"x":576, "y":448,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_handYellow",
+            "frame": {"x":576, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_handRed",
+            "frame": {"x":576, "y":576,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_handPurple",
+            "frame": {"x":576, "y":640,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "char_handGreen",
+            "frame": {"x":640, "y":0,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_arrow",
+            "frame": {"x":512, "y":256,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_blaster",
+            "frame": {"x":512, "y":192,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_bow",
+            "frame": {"x":512, "y":128,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_gun",
+            "frame": {"x":512, "y":64,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_hat",
+            "frame": {"x":512, "y":0,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_hatTop",
+            "frame": {"x":448, "y":640,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_helmet",
+            "frame": {"x":448, "y":576,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_helmetModern",
+            "frame": {"x":448, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_pencil",
+            "frame": {"x":448, "y":384,"w":64,"h":128},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_rod",
+            "frame": {"x":448, "y":256,"w":64,"h":128},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_shield",
+            "frame": {"x":512, "y":320,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_shieldRound",
+            "frame": {"x":448, "y":192,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_spear",
+            "frame": {"x":448, "y":64,"w":64,"h":158},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "item_sword",
+            "frame": {"x":448, "y":0,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "tile_chest",
+            "frame": {"x":320, "y":0,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "tile_coin",
+            "frame": {"x":256, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "tile_gem",
+            "frame": {"x":192, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "tile_heart",
+            "frame": {"x":192, "y":320,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "tile_key",
+            "frame": {"x":192, "y":192,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_hand",
+            "frame": {"x":64, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num0",
+            "frame": {"x":64, "y":448,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num1",
+            "frame": {"x":64, "y":384,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num2",
+            "frame": {"x":64, "y":320,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num3",
+            "frame": {"x":128, "y":0,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num4",
+            "frame": {"x":64, "y":192,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num5",
+            "frame": {"x":128, "y":128,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num6",
+            "frame": {"x":0, "y":578,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num7",
+            "frame": {"x":0, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num8",
+            "frame": {"x":0, "y":448,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "ui_num9",
+            "frame": {"x":64, "y":256,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        }
+    ]
+}
