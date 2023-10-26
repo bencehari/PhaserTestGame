@@ -45,6 +45,7 @@ class Player {
                 image.setTint(Phaser.Display.Color.GetColor(255, value, value))
             },
         })
+        this.#scene.cameras.main.shake(200, 0.005)
     }
 
     update() {
