@@ -2,6 +2,8 @@ class Player {
     /** @type {PhysicsImage} */ #image
     /** @type {CursorKeys} */ #cursor
 
+    /** @type {Phaser.Scene} */ #scene
+
     #speed
 
     /**
@@ -10,6 +12,8 @@ class Player {
      * @param {PhysicsGroup} group
      */
     constructor(scene, speed, group) {
+        this.#scene = scene
+
         this.#cursor = scene.input.keyboard.createCursorKeys()
         
         this.#image = scene.physics.add.image(scene.game.config.width * 0.5, scene.game.config.height * 0.5, 'mainatlas', 'char_squareYellow')
@@ -27,6 +31,20 @@ class Player {
      */
     getPosition() {
         return { x: this.#image.x, y: this.#image.y }
+    }
+
+    hit() {
+        const image = this.#image
+        image.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
+        this.#scene.tweens.addCounter({
+            from: 0,
+            to: 255,
+            duration: 300,
+            onUpdate: function(tween) {
+                const value = Math.floor(tween.getValue())
+                image.setTint(Phaser.Display.Color.GetColor(255, value, value))
+            },
+        })
     }
 
     update() {

@@ -14,7 +14,7 @@ const game = new Phaser.Game({
     backgroundColor: '#2d2d2d',
     physics: {
         default: 'arcade',
-        arcade: physicsDebug,
+        // arcade: physicsDebug,
     },
     parent: 'game',
     scale: {

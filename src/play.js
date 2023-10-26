@@ -6,6 +6,13 @@ class Play extends Phaser.Scene {
     /** @type {PhysicsGroup} */ #playerGroup
     /** @type {PhysicsGroup} */ #enemyGroup
 
+    /** @type {number} */ #lastHitTime = 0
+    #hitDelay = 1000
+
+    preload() {
+        this.#lastHitTime = 0
+    }
+
     create() {
         this.#playerGroup = this.physics.add.group()
         this.#enemyGroup = this.physics.add.group()
@@ -21,7 +28,14 @@ class Play extends Phaser.Scene {
         )
 
         this.physics.add.collider(this.#enemyGroup, this.#enemyGroup)
-        this.physics.add.overlap(this.#playerGroup, this.#enemyGroup)
+        this.physics.add.overlap(this.#playerGroup, this.#enemyGroup, this.enemyOverlapPlayer, null, this)
+    }
+
+    enemyOverlapPlayer(player, enemy) {
+        if (this.#lastHitTime + this.#hitDelay > this.time.now) return
+
+        this.#player.hit()
+        this.#lastHitTime = this.time.now
     }
 
     update() {
