@@ -8,9 +8,11 @@
 /** @typedef {Phaser.GameObjects.Image} Img */
 
 // physics
-/** @typedef {Phaser.Physics.Arcade.Group} Group */
-/** @typedef {Phaser.Physics.Arcade.StaticGroup} SGroup */
-/** @typedef {Phaser.Types.Physics.Arcade.SpriteWithDynamicBody} SpriteWithDynamicBody */
+/** @typedef {Phaser.Physics.Arcade.Group} PhysicsGroup */
+/** @typedef {Phaser.Physics.Arcade.StaticGroup} PhysicsStaticGroup */
+
+/** @typedef {Phaser.Types.Physics.Arcade.ImageWithDynamicBody} PhysicsImage */
+/** @typedef {Phaser.Types.Physics.Arcade.SpriteWithDynamicBody} PhysicsSprite */
 
 // tilemap
 /** @typedef {Phaser.Tilemaps.TilemapLayer} TilemapLayer */
