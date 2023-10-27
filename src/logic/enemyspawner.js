@@ -12,7 +12,7 @@ class EnemySpawner {
     constructor(scene, spawnDelay, enemyGroup, player) {
         this.#player = player
 
-        const enemySpeed = [100, 125, 150, 175]
+        const enemySpeed = [80, 90, 100, 110]
         const enemies = this.#enemies
 
         scene.time.addEvent({

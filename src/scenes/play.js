@@ -19,7 +19,7 @@ class Play extends Phaser.Scene {
         this.#playerGroup = this.physics.add.group()
         this.#enemyGroup = this.physics.add.group()
 
-        this.#player = new Player(this, 200, this.#playerGroup)
+        this.#player = new Player(this, 100, this.#playerGroup)
         this.cameras.main.startFollow(this.#player.getPhysicsImage())
 
         this.#enemySpawner = new EnemySpawner(this, 2000, this.#enemyGroup, this.#player)

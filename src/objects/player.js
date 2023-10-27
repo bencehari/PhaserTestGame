@@ -19,6 +19,7 @@ class Player {
         this.#image = scene.physics.add.image(scene.game.config.width * 0.5, scene.game.config.height * 0.5, 'mainatlas', 'char_squareYellow')
         this.#image.body.setSize(32, 32)
         this.#image.body.setOffset(16, 32)
+        this.#image.setScale(g_scale)
 
         group.add(this.#image)
 
