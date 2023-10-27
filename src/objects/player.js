@@ -1,9 +1,9 @@
 class Player {
-    /** @type {PhysicsImage} */ #image
-    /** @type {CursorKeys} */ #cursor
-
     /** @type {Phaser.Scene} */ #scene
+    /** @type {CursorKeys} */ #cursor
+    /** @type {PhysicsImage} */ #image
 
+    #level
     #speed
 
     /**
@@ -11,9 +11,8 @@ class Player {
      * @param {number} speed
      * @param {PhysicsGroup} group
      */
-    constructor(scene, speed, group) {
+    constructor(scene, level, speed, group) {
         this.#scene = scene
-
         this.#cursor = scene.input.keyboard.createCursorKeys()
 
         this.#image = scene.physics.add.image(scene.game.config.width * 0.5, scene.game.config.height * 0.5, 'mainatlas', 'char_squareYellow')
@@ -23,6 +22,7 @@ class Player {
 
         group.add(this.#image)
 
+        this.#level = level
         this.#speed = speed
     }
 

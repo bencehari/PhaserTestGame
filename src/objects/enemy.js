@@ -22,6 +22,13 @@ class Enemy {
     }
 
     /**
+     * @returns {Phaser.Types.Math.Vector2Like} position
+     */
+    getPosition() {
+        return { x: this.#image.x, y: this.#image.y }
+    }
+
+    /**
      * @param { Phaser.Types.Math.Vector2Like } playerPos
      */
     update(playerPos) {
