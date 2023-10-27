@@ -46,11 +46,16 @@ class Play extends Phaser.Scene {
         this.events.emit('playerHit')
     }
 
+    /**
+     * @param {PhysicsImage} enemy 
+     * @param {PhysicsImage} skill 
+     */
     enemyOverlapSkill(enemy, skill) {
-        // TODO: kill enemy
+        this.#enemyHandler.enemyKilled(enemy.getData('owner'))
+        this.#enemyGroup.remove(enemy)
+        enemy.destroy()
 
-        this.#playerSkillsGroup.remove(skill)
-        skill.destroy()
+        this.destroySkill(skill)
     }
 
     update() {
@@ -76,6 +81,13 @@ class Play extends Phaser.Scene {
         this.#playerSkillsGroup.add(fireball)
         fireball.setVelocity(this.#closestEnemyDir.x * speed, this.#closestEnemyDir.y * speed)
 
-        // TODO: destroy fireball after some time
+        this.time.delayedCall(5000, this.destroySkill, [fireball], this)
+    }
+
+    destroySkill(skill) {
+        if (skill === null) return
+
+        this.#playerSkillsGroup.remove(skill)
+        skill.destroy()
     }
 }

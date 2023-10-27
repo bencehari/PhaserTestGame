@@ -12,6 +12,8 @@ class Enemy {
      */
     constructor(scene, x, y, speed, group) {
         this.#image = scene.physics.add.image(x, y, 'mainatlas', 'char_roundRed')
+        this.#image.setData('owner', this)
+
         this.#image.body.setSize(32, 32)
         this.#image.body.setOffset(16, 32)
         this.#image.setScale(g_scale)

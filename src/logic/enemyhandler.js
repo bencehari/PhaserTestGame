@@ -1,7 +1,7 @@
 class EnemyHandler {
     /** @type {Player} */ #player
 
-    /** @type {Enemy} */ #enemies = []
+    /** @type {Array<Enemy>} */ #enemies = []
 
     /**
      * @param {Phaser.Scene} scene
@@ -58,6 +58,19 @@ class EnemyHandler {
         let i = this.#enemies.length
         while (i--) {
             this.#enemies[i].update(this.#player.getPosition())
+        }
+    }
+
+    /**
+     * @param {Enemy} enemy 
+     */
+    enemyKilled(enemy) {
+        let i = this.#enemies.length
+        while (i--) {
+            if (this.#enemies[i] === enemy) {
+                this.#enemies.splice(i, 1)
+                break
+            }
         }
     }
 }
