@@ -1,0 +1,44 @@
+{
+    "frames": [
+        {
+            "filename": "red_char",
+            "frame": {"x":0, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "red_hand",
+            "frame": {"x":64, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "purple_char",
+            "frame": {"x":128, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "purple_hand",
+            "frame": {"x":192, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "yellow_char",
+            "frame": {"x":256, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "yellow_hand",
+            "frame": {"x":320, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "green_char",
+            "frame": {"x":384, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        },
+        {
+            "filename": "green_hand",
+            "frame": {"x":448, "y":512,"w":64,"h":64},
+            "pivot": {"x":0.5,"y":0.5}
+        }
+    ]
+}
