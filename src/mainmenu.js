@@ -1,5 +1,5 @@
 class MainMenu extends Phaser.Scene {
     create() {
-        this.scene.start('play')
+        this.scene.start('play', { lives: 3 })
     }
 }

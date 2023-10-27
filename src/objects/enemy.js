@@ -21,14 +21,11 @@ class Enemy {
     }
 
     /**
-     * @param { Phaser.Types.Math.Vector2Like } playerPos 
+     * @param { Phaser.Types.Math.Vector2Like } playerPos
      */
     update(playerPos) {
         const vec = new Phaser.Math.Vector2(playerPos.x - this.#image.x, playerPos.y - this.#image.y)
         vec.normalize()
-
-        /*this.#image.x += vec.x * this.#speed
-        this.#image.y += vec.y * this.#speed*/
 
         this.#image.body.velocity.x = vec.x * this.#speed
         this.#image.body.velocity.y = vec.y * this.#speed
