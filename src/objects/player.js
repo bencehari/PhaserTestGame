@@ -15,7 +15,7 @@ class Player {
         this.#scene = scene
 
         this.#cursor = scene.input.keyboard.createCursorKeys()
-        
+
         this.#image = scene.physics.add.image(scene.game.config.width * 0.5, scene.game.config.height * 0.5, 'mainatlas', 'char_squareYellow')
         this.#image.body.setSize(32, 32)
         this.#image.body.setOffset(16, 32)
@@ -26,8 +26,14 @@ class Player {
     }
 
     /**
-     * returns the position of the object
-     * @returns { Phaser.Types.Math.Vector2Like }
+     * @returns {PhysicsImage}
+     */
+    getPhysicsImage() {
+        return this.#image
+    }
+
+    /**
+     * @returns {Phaser.Types.Math.Vector2Like}
      */
     getPosition() {
         return { x: this.#image.x, y: this.#image.y }
@@ -49,7 +55,7 @@ class Player {
     }
 
     update() {
-        this.#image.body.velocity.x = 0 // Phaser.Math.Vector2.ZERO
+        this.#image.body.velocity.x = 0
         this.#image.body.velocity.y = 0
 
         if (this.#cursor.up.isDown) this.#image.body.velocity.y += -this.#speed

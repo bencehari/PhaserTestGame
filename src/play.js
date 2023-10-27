@@ -18,6 +18,7 @@ class Play extends Phaser.Scene {
         this.#enemyGroup = this.physics.add.group()
 
         this.#player = new Player(this, 200, this.#playerGroup)
+        this.cameras.main.startFollow(this.#player.getPhysicsImage())
 
         const enemySpeed = 100
         this.#enemies.push(
