@@ -10,6 +10,7 @@ class Init extends Phaser.Scene {
 
         this.load.atlas('mainatlas', '../assets/scribble_platformer_spritesheet.png', '../assets/scribble_platformer_spritesheet_atlas.json')
         this.load.atlas('secatlas', '../assets/scribble_dungeons_spritesheet.png', '../assets/scribble_dungeons_spritesheet_atlas.json')
+        this.load.image('grass', '../assets/grass.png')
     }
 
     progress(value) {

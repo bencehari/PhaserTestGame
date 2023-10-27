@@ -6,6 +6,7 @@
 
 // gameObject
 /** @typedef {Phaser.GameObjects.Image} Img */
+/** @typedef {Phaser.GameObjects.TileSprite} TileSprite */
 
 // physics
 /** @typedef {Phaser.Physics.Arcade.Group} PhysicsGroup */

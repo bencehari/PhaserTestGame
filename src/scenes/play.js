@@ -1,4 +1,6 @@
 class Play extends Phaser.Scene {
+    /** @type {TileSprite} */ #background
+
     /** @type {Player} */ #player
     /** @type {EnemyHandler} */ #enemyHandler
 
@@ -23,6 +25,11 @@ class Play extends Phaser.Scene {
     create(data) {
         this.scene.launch('playUI', data.lives)
 
+        this.#background = this.add.tileSprite(
+            this.game.config.width * 0.5, this.game.config.height * 0.5,
+            this.game.config.width, this.game.config.height,
+            'grass')
+
         this.#playerGroup = this.physics.add.group()
         this.#playerSkillsGroup = this.physics.add.group()
         this.#enemyGroup = this.physics.add.group()
@@ -37,6 +44,10 @@ class Play extends Phaser.Scene {
         this.physics.add.overlap(this.#enemyGroup, this.#playerSkillsGroup, this.enemyOverlapSkill, null, this)
     }
 
+    /**
+     * @param {PhysicsImage} player
+     * @param {PhysicsImage} enemy
+     */
     enemyOverlapPlayer(player, enemy) {
         if (this.#lastHitTime + this.#hitDelay > this.time.now) return
 
@@ -60,9 +71,14 @@ class Play extends Phaser.Scene {
 
     update() {
         this.#player.update()
+        const ppos = this.#player.getPosition()
+
+        this.#background.setPosition(ppos.x, ppos.y)
+        this.#background.setTilePosition(ppos.x, ppos.y)
+
         this.#enemyHandler.update()
 
-        this.#closestEnemyDir = this.#enemyHandler.getClosesEnemy(this.#player.getPosition())
+        this.#closestEnemyDir = this.#enemyHandler.getClosesEnemy(ppos)
         this.castSpell()
     }
 
