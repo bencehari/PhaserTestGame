@@ -76,5 +76,7 @@ class Player {
             this.#image.body.velocity.x += this.#speed
             this.#image.flipX = false
         }
+
+        this.#image.depth = this.#image.y + this.#image.height * 0.5
     }
 }

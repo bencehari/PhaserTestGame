@@ -51,5 +51,7 @@ class Enemy {
         this.#image.body.velocity.y = vec.y * this.#speed
 
         this.#image.flipX = this.#image.body.velocity.x < 0
+        // TODO: there are some z-fights in the crowd
+        this.#image.depth = this.#image.y + this.#image.height * 0.5
     }
 }
