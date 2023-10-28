@@ -23,14 +23,18 @@ class EnemyHandler {
             loop: false,
             callback: function() {
                 const playerPos = player.getPosition()
-                enemies.push(
-                    new Enemy(
-                        scene,
-                        playerPos.x + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * spawnDistanceMod,
-                        playerPos.y + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * spawnDistanceMod,
-                        1,
-                        Phaser.Math.RND.pick(speed),
-                        enemyGroup))
+                for (let i = 0; i < 3; i++) {
+                    enemies.push(
+                        new Enemy(
+                            scene,
+                            playerPos.x + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * spawnDistanceMod,
+                            playerPos.y + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * spawnDistanceMod,
+                            1,
+                            Phaser.Math.RND.pick(speed),
+                            enemyGroup
+                        )
+                    )
+                }
             },
         })
     }

@@ -3,6 +3,7 @@ class Enemy {
 
     #level
     #speed
+    #depthMod
 
     /**
      * @param {Phaser.Scene} scene
@@ -24,6 +25,7 @@ class Enemy {
 
         this.#level = level
         this.#speed = speed
+        this.#depthMod = Phaser.Math.RND.between(0, 3)
     }
 
     /**
@@ -52,6 +54,6 @@ class Enemy {
 
         this.#image.flipX = this.#image.body.velocity.x < 0
         // TODO: there are some z-fights in the crowd
-        this.#image.depth = this.#image.y + this.#image.height * 0.5
+        this.#image.depth = this.#image.y + this.#image.height * 0.5 + this.#depthMod
     }
 }

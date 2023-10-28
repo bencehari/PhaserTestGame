@@ -1,3 +1,7 @@
+const SPELL = {
+	fireball: 0
+}
+
 const fireball = {
 	atlas: 'secatlas',
 	frame: 'red_char',

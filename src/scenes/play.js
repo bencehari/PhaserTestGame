@@ -2,6 +2,7 @@ class Play extends Phaser.Scene {
     /** @type {TileSprite} */ #background
 
     /** @type {Player} */ #player
+    /** @type {SpellCaster} */ #spellCaster
     /** @type {EnemyHandler} */ #enemyHandler
 
     // physics
@@ -14,11 +15,8 @@ class Play extends Phaser.Scene {
 
     /** @type {dir: Phaser.Math.Vector2, distSq: number} */ #closestEnemyDir
 
-    #lastCastTime = 0
-
     preload() {
         this.#lastHitTime = 0
-        this.#lastCastTime = 0
     }
 
     create(data) {
@@ -40,6 +38,8 @@ class Play extends Phaser.Scene {
         this.cameras.main.startFollow(this.#player.getPhysicsImage())
 
         this.#enemyHandler = new EnemyHandler(this, 500, 100, enemySpeed, this.#enemyGroup, this.#player)
+        
+        this.#spellCaster = new SpellCaster(this, this.#player, this.#enemyHandler, this.#playerSkillsGroup)
 
         this.physics.add.collider(this.#enemyGroup, this.#enemyGroup)
         this.physics.add.overlap(this.#playerGroup, this.#enemyGroup, this.enemyOverlapPlayer, null, this)
@@ -73,7 +73,7 @@ class Play extends Phaser.Scene {
             enemy.destroy()
         }
 
-        this.destroySkill(skill)
+        this.#spellCaster.destroySkill(skill)
     }
 
     update() {
@@ -85,34 +85,6 @@ class Play extends Phaser.Scene {
 
         this.#enemyHandler.update()
 
-        this.#closestEnemyDir = this.#enemyHandler.getClosesEnemy(ppos)
-        this.castSpell()
-    }
-
-    castSpell() {
-        if (this.#closestEnemyDir.dir === null) return
-        else if (this.#closestEnemyDir.distSq > fireball.rangeSq) return
-
-        if (this.#lastCastTime + fireball.castDelay > this.time.now) return
-
-        this.#lastCastTime = this.time.now
-
-        const ppos = this.#player.getPosition()
-
-        const fb = this.physics.add.image(ppos.x, ppos.y, fireball.atlas, fireball.frame)
-        fb.setScale(g_scale)
-        this.#playerSkillsGroup.add(fb)
-        fb.setVelocity(this.#closestEnemyDir.dir.x * fireball.speed, this.#closestEnemyDir.dir.y * fireball.speed)
-
-        fb.setData('level', this.#player.getLevel())
-
-        this.time.delayedCall(fireball.lifetime, this.destroySkill, [fb], this)
-    }
-
-    destroySkill(skill) {
-        if (skill === null) return
-
-        this.#playerSkillsGroup.remove(skill)
-        skill.destroy()
+        this.#spellCaster.update()
     }
 }
