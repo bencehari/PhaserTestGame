@@ -49,5 +49,7 @@ class Enemy {
 
         this.#image.body.velocity.x = vec.x * this.#speed
         this.#image.body.velocity.y = vec.y * this.#speed
+
+        this.#image.flipX = this.#image.body.velocity.x < 0
     }
 }

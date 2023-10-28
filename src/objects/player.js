@@ -68,7 +68,13 @@ class Player {
 
         if (this.#cursor.up.isDown) this.#image.body.velocity.y += -this.#speed
         if (this.#cursor.down.isDown) this.#image.body.velocity.y += this.#speed
-        if (this.#cursor.left.isDown) this.#image.body.velocity.x += -this.#speed
-        if (this.#cursor.right.isDown) this.#image.body.velocity.x += this.#speed
+        if (this.#cursor.left.isDown) {
+            this.#image.body.velocity.x += -this.#speed
+            this.#image.flipX = true
+        }
+        if (this.#cursor.right.isDown) {
+            this.#image.body.velocity.x += this.#speed
+            this.#image.flipX = false
+        }
     }
 }
