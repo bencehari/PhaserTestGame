@@ -15,7 +15,6 @@ class Play extends Phaser.Scene {
     /** @type {Phaser.Math.Vector2} */ #closestEnemyDir
 
     #lastCastTime = 0
-    #castDelay = 1500
 
     preload() {
         this.#lastHitTime = 0
@@ -34,10 +33,13 @@ class Play extends Phaser.Scene {
         this.#playerSkillsGroup = this.physics.add.group()
         this.#enemyGroup = this.physics.add.group()
 
-        this.#player = new Player(this, data.level, 100, this.#playerGroup)
+        const playerSpeed = 50
+        const enemySpeed = [40, 45, 50, 55]
+
+        this.#player = new Player(this, data.level, playerSpeed, this.#playerGroup)
         this.cameras.main.startFollow(this.#player.getPhysicsImage())
 
-        this.#enemyHandler = new EnemyHandler(this, 2000, this.#enemyGroup, this.#player)
+        this.#enemyHandler = new EnemyHandler(this, 500, 100, enemySpeed, this.#enemyGroup, this.#player)
 
         this.physics.add.collider(this.#enemyGroup, this.#enemyGroup)
         this.physics.add.overlap(this.#playerGroup, this.#enemyGroup, this.enemyOverlapPlayer, null, this)
@@ -62,9 +64,14 @@ class Play extends Phaser.Scene {
      * @param {PhysicsImage} skill 
      */
     enemyOverlapSkill(enemy, skill) {
-        this.#enemyHandler.enemyKilled(enemy.getData('owner'))
-        this.#enemyGroup.remove(enemy)
-        enemy.destroy()
+        const e = enemy.getData('owner')
+        const target = Phaser.Math.Clamp(fireball.baseHitChance + (skill.getData('level') - e.getLevel()) * 5, 5, 95)
+
+        if (Phaser.Math.RND.integerInRange(0, 100) < target) {
+            this.#enemyHandler.enemyKilled(e)
+            this.#enemyGroup.remove(enemy)
+            enemy.destroy()
+        }
 
         this.destroySkill(skill)
     }
@@ -84,20 +91,20 @@ class Play extends Phaser.Scene {
 
     castSpell() {
         if (this.#closestEnemyDir === null) return
-        if (this.#lastCastTime + this.#castDelay > this.time.now) return
+        if (this.#lastCastTime + fireball.castDelay > this.time.now) return
 
         this.#lastCastTime = this.time.now
 
         const ppos = this.#player.getPosition()
 
-        const speed = 100
+        const fb = this.physics.add.image(ppos.x, ppos.y, fireball.atlas, fireball.frame)
+        fb.setScale(g_scale)
+        this.#playerSkillsGroup.add(fb)
+        fb.setVelocity(this.#closestEnemyDir.x * fireball.speed, this.#closestEnemyDir.y * fireball.speed)
 
-        const fireball = this.physics.add.image(ppos.x, ppos.y, 'secatlas', 'red_char')
-        fireball.setScale(g_scale)
-        this.#playerSkillsGroup.add(fireball)
-        fireball.setVelocity(this.#closestEnemyDir.x * speed, this.#closestEnemyDir.y * speed)
+        fb.setData('level', this.#player.getLevel())
 
-        this.time.delayedCall(5000, this.destroySkill, [fireball], this)
+        this.time.delayedCall(fireball.lifetime, this.destroySkill, [fb], this)
     }
 
     destroySkill(skill) {

@@ -34,6 +34,13 @@ class Player {
     }
 
     /**
+     * @returns {integer} level
+     */
+    getLevel() {
+        return this.#level
+    }
+
+    /**
      * @returns {Phaser.Types.Math.Vector2Like}
      */
     getPosition() {

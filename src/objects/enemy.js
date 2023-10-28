@@ -1,16 +1,18 @@
 class Enemy {
     /** @type {PhysicsImage} */ #image
 
+    #level
     #speed
 
     /**
      * @param {Phaser.Scene} scene
      * @param {number} x x position
      * @param {number} y y position
+     * @param {integer} level
      * @param {number} speed
      * @param {PhysicsGroup} group
      */
-    constructor(scene, x, y, speed, group) {
+    constructor(scene, x, y, level, speed, group) {
         this.#image = scene.physics.add.image(x, y, 'mainatlas', 'char_roundRed')
         this.#image.setData('owner', this)
 
@@ -20,7 +22,15 @@ class Enemy {
 
         group.add(this.#image)
 
+        this.#level = level
         this.#speed = speed
+    }
+
+    /**
+     * @returns {integer} level
+     */
+    getLevel() {
+        return this.#level
     }
 
     /**

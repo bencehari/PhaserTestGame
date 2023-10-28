@@ -6,27 +6,30 @@ class EnemyHandler {
     /**
      * @param {Phaser.Scene} scene
      * @param {number} spawnDelay
+     * @param {integer} repeatCount
+     * @param {Array<integer>} speed
      * @param {PhysicsGroup} enemyGroup
      * @param {Player} player
      */
-    constructor(scene, spawnDelay, enemyGroup, player) {
+    constructor(scene, spawnDelay, repeatCount, speed, enemyGroup, player) {
         this.#player = player
 
-        const enemySpeed = [80, 90, 100, 110]
         const enemies = this.#enemies
+        const spawnDistanceMod = 1000
 
         scene.time.addEvent({
             delay: spawnDelay,
-            repeat: 10,
+            repeat: repeatCount,
             loop: false,
             callback: function() {
                 const playerPos = player.getPosition()
                 enemies.push(
                     new Enemy(
                         scene,
-                        playerPos.x + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * 1000,
-                        playerPos.y + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * 1000,
-                        Phaser.Math.RND.pick(enemySpeed),
+                        playerPos.x + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * spawnDistanceMod,
+                        playerPos.y + Phaser.Math.RND.realInRange(0.3, 1) * Phaser.Math.RND.pick([-1, 1]) * spawnDistanceMod,
+                        1,
+                        Phaser.Math.RND.pick(speed),
                         enemyGroup))
             },
         })
