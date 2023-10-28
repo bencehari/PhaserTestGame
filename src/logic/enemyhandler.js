@@ -37,10 +37,10 @@ class EnemyHandler {
 
     /**
      * @param {Phaser.Types.Math.Vector2Like} tpos target position
-     * @returns {Phaser.Math.Vector2} dir vector pointing to closest enemy from tpos
+     * @returns {dir: Phaser.Math.Vector2, distSq: number} dir vector pointing to closest enemy from tpos
      */
     getClosesEnemy(tpos) {
-        let min_dist = Number.MAX_VALUE
+        let minDist = Number.MAX_VALUE
         let direction = null
 
         let i = this.#enemies.length
@@ -48,13 +48,16 @@ class EnemyHandler {
             const epos = this.#enemies[i].getPosition()
             const vec = new Phaser.Math.Vector2(epos.x - tpos.x, epos.y - tpos.y)
             const dist = vec.lengthSq()
-            if (dist < min_dist) {
-                min_dist = dist
+            if (dist < minDist) {
+                minDist = dist
                 direction = vec
             }
         }
 
-        return direction !== null ? direction.normalize() : null
+        return {
+            dir: direction !== null ? direction.normalize() : null,
+            distSq: minDist
+        }
     }
 
     update() {

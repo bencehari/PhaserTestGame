@@ -12,7 +12,7 @@ class Play extends Phaser.Scene {
     #lastHitTime = 0
     #hitDelay = 1000
 
-    /** @type {Phaser.Math.Vector2} */ #closestEnemyDir
+    /** @type {dir: Phaser.Math.Vector2, distSq: number} */ #closestEnemyDir
 
     #lastCastTime = 0
 
@@ -90,7 +90,9 @@ class Play extends Phaser.Scene {
     }
 
     castSpell() {
-        if (this.#closestEnemyDir === null) return
+        if (this.#closestEnemyDir.dir === null) return
+        else if (this.#closestEnemyDir.distSq > fireball.rangeSq) return
+
         if (this.#lastCastTime + fireball.castDelay > this.time.now) return
 
         this.#lastCastTime = this.time.now
@@ -100,7 +102,7 @@ class Play extends Phaser.Scene {
         const fb = this.physics.add.image(ppos.x, ppos.y, fireball.atlas, fireball.frame)
         fb.setScale(g_scale)
         this.#playerSkillsGroup.add(fb)
-        fb.setVelocity(this.#closestEnemyDir.x * fireball.speed, this.#closestEnemyDir.y * fireball.speed)
+        fb.setVelocity(this.#closestEnemyDir.dir.x * fireball.speed, this.#closestEnemyDir.dir.y * fireball.speed)
 
         fb.setData('level', this.#player.getLevel())
 
