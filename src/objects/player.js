@@ -3,15 +3,18 @@ class Player {
     /** @type {CursorKeys} */ #cursor
     /** @type {PhysicsImage} */ #image
 
+    #lives
     #level
     #speed
 
     /**
      * @param {Phaser.Scene} scene
+     * @param {integer} lives
+     * @param {integer} level
      * @param {number} speed
      * @param {PhysicsGroup} group
      */
-    constructor(scene, level, speed, group) {
+    constructor(scene, lives, level, speed, group) {
         this.#scene = scene
         this.#cursor = scene.input.keyboard.createCursorKeys()
 
@@ -22,6 +25,7 @@ class Player {
 
         group.add(this.#image)
 
+        this.#lives = lives
         this.#level = level
         this.#speed = speed
     }
@@ -47,7 +51,12 @@ class Player {
         return { x: this.#image.x, y: this.#image.y }
     }
 
+    /**
+     * @returns {integer} actual lives of player
+     */
     hit() {
+        this.#lives--
+
         const image = this.#image
         image.setTint(Phaser.Display.Color.GetColor(255, 0, 0))
         this.#scene.tweens.addCounter({
@@ -60,6 +69,8 @@ class Player {
             },
         })
         this.#scene.cameras.main.shake(200, 0.005)
+
+        return this.#lives
     }
 
     update() {
@@ -78,5 +89,10 @@ class Player {
         }
 
         this.#image.depth = this.#image.y + this.#image.height * 0.5
+    }
+
+    // debug
+    setLives(lives) {
+        this.#lives = lives
     }
 }

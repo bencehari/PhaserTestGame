@@ -13,8 +13,6 @@ class Play extends Phaser.Scene {
     #lastHitTime = 0
     #hitDelay = 1000
 
-    /** @type {dir: Phaser.Math.Vector2, distSq: number} */ #closestEnemyDir
-
     preload() {
         this.#lastHitTime = 0
     }
@@ -25,7 +23,12 @@ class Play extends Phaser.Scene {
         this.#background = this.add.tileSprite(
             this.game.config.width * 0.5, this.game.config.height * 0.5,
             this.game.config.width, this.game.config.height,
-            'grass')
+            'grass'
+        )
+        
+        // TODO: should be something Number.NEGATIVE_MIN_VALUE
+        // (Number.MIN_VALUE returns the closest number to ZERO)
+        this.#background.depth = -10000
 
         this.#playerGroup = this.physics.add.group()
         this.#playerSkillsGroup = this.physics.add.group()
@@ -34,7 +37,7 @@ class Play extends Phaser.Scene {
         const playerSpeed = 50
         const enemySpeed = [40, 45, 50, 55]
 
-        this.#player = new Player(this, data.level, playerSpeed, this.#playerGroup)
+        this.#player = new Player(this, data.lives, data.level, playerSpeed, this.#playerGroup)
         this.cameras.main.startFollow(this.#player.getPhysicsImage())
 
         this.#enemyHandler = new EnemyHandler(this, 500, 100, enemySpeed, this.#enemyGroup, this.#player)
@@ -53,10 +56,21 @@ class Play extends Phaser.Scene {
     enemyOverlapPlayer(player, enemy) {
         if (this.#lastHitTime + this.#hitDelay > this.time.now) return
 
-        this.#player.hit()
+        const lives = this.#player.hit()
         this.#lastHitTime = this.time.now
 
-        this.events.emit('playerHit')
+        this.events.emit('playerHit', [lives])
+
+        // debug
+        if (lives === -1) {
+            this.#player.setLives(3)
+        }
+
+        // TODO: game over
+        if (lives === 0) {
+            // TODO: restarting this way isn't working...
+            // this.scene.start('mainmenu')
+        }
     }
 
     /**
