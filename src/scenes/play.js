@@ -18,8 +18,6 @@ class Play extends Phaser.Scene {
     }
 
     create(data) {
-        this.scene.launch('playUI', data.lives)
-
         this.#background = this.add.tileSprite(
             this.game.config.width * 0.5, this.game.config.height * 0.5,
             this.game.config.width, this.game.config.height,
@@ -47,6 +45,10 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.#enemyGroup, this.#enemyGroup)
         this.physics.add.overlap(this.#playerGroup, this.#enemyGroup, this.enemyOverlapPlayer, null, this)
         this.physics.add.overlap(this.#enemyGroup, this.#playerSkillsGroup, this.enemyOverlapSkill, null, this)
+
+        // TODO: workaround
+        this.game.scene.add('playUI', PlayUI)
+        this.scene.launch('playUI', data.lives)
     }
 
     /**
@@ -62,14 +64,16 @@ class Play extends Phaser.Scene {
         this.events.emit('playerHit', [lives])
 
         // debug
-        if (lives === -1) {
+        /*if (lives === -1) {
             this.#player.setLives(3)
-        }
+            return
+        }*/
 
         // TODO: game over
         if (lives === 0) {
-            // TODO: restarting this way isn't working...
-            // this.scene.start('mainmenu')
+            this.scene.stop('playUI')
+            this.scene.remove('playUI')
+            this.scene.start('mainmenu')
         }
     }
 

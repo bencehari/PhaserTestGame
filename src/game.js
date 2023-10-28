@@ -34,6 +34,6 @@ const game = new Phaser.Game({
 game.scene.add('init', Init)
 game.scene.add('mainmenu', MainMenu)
 game.scene.add('play', Play)
-game.scene.add('playUI', PlayUI)
+// game.scene.add('playUI', PlayUI)
 
 game.scene.start('init')

@@ -1,4 +1,6 @@
 class PlayUI extends Phaser.Scene {
+    /** @type {Phaser.Scene} */ #playScene
+
     /** @type {Img} */ #hearts = []
 
     /** @type {PText} */ #pauseText
@@ -12,8 +14,9 @@ class PlayUI extends Phaser.Scene {
             this.#hearts.push(h)
         }
 
-        const play = this.scene.get('play')
-        play.events.on('playerHit', this.onPlayerHit, this)
+        // TODO: should avoid using built-in scene events
+        this.#playScene = this.scene.get('play')
+        this.#playScene.events.on('playerHit', this.onPlayerHit, this)
 
         const textStyle = getDefaultTextStyle(30)
         textStyle.backgroundColor = '#000000'
@@ -23,6 +26,20 @@ class PlayUI extends Phaser.Scene {
         this.#pauseText.setVisible(false)
 
         this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC).on('down', this.onESCDown, this)
+        this.events.on('shutdown', this.onShutdown, this)
+    }
+
+    onPlayerHit(lives) {
+        // console.log(`[playUI.onPlayerHit] lives: ${lives}`)
+
+        if (lives == -1) {
+            // Debug revive
+            let i = this.#hearts.length
+            while (i--) {
+                this.#hearts[i].setVisible(true)
+            }
+        }
+        else this.#hearts[lives].setVisible(false)
     }
 
     onESCDown() {
@@ -38,14 +55,8 @@ class PlayUI extends Phaser.Scene {
         this.#paused = !this.#paused
     }
 
-    onPlayerHit(lives) {
-        if (lives == -1) {
-            // Debug revive
-            let i = this.#hearts.length
-            while (i--) {
-                this.#hearts[i].setVisible(true)
-            }
-        }
-        else this.#hearts[lives].setVisible(false)
+    onShutdown() {
+        this.#playScene.events.off('playerHit', this.onPlayerHit, this)
+        this.events.off('shutdown', this.onShutdown, this)
     }
 }
