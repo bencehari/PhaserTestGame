@@ -1,5 +1,5 @@
 class MainMenu extends Phaser.Scene {
-    /** @type {Phaser.Input.Keyboard.Key} */ #spaceBar
+    /** @type {Key} */ #spaceBar
 
     create() {
         this.#spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)

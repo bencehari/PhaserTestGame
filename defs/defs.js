@@ -1,5 +1,6 @@
 // input
 /** @typedef {Phaser.Types.Input.Keyboard.CursorKeys} CursorKeys */
+/** @typedef {Phaser.Input.Keyboard.Key} Key */
 
 // sound
 /** @typedef {Phaser.Sound.WebAudioSound} Sound */
@@ -19,6 +20,7 @@
 /** @typedef {Phaser.Tilemaps.TilemapLayer} TilemapLayer */
 
 // UI
+/** @typedef {Phaser.Types.GameObjects.Text.TextStyle} TextStyle */
 /** @typedef {Phaser.GameObjects.Text} PText */
 
 // particles
