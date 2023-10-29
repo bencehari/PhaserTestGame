@@ -23,7 +23,7 @@ class SpellCaster {
 	}
 
 	update() {
-        this.castFireball(this.#enemyHandler.getClosesEnemy(this.#player.getPosition()))
+        this.castFireball(this.#enemyHandler.getClosesEnemy(this.#player.position))
 	}
 
 	/**
@@ -38,7 +38,7 @@ class SpellCaster {
 
         this.#lastCastTime = now
 
-        const ppos = this.#player.getPosition()
+        const ppos = this.#player.position
 
         const fb = this.#scene.physics.add.image(ppos.x, ppos.y, fireball.atlas, fireball.frame)
         fb.setScale(g_scale)
@@ -46,7 +46,7 @@ class SpellCaster {
         this.#skillGroup.add(fb)
         fb.setVelocity(target.dir.x * fireball.speed, target.dir.y * fireball.speed)
 
-        fb.setData('level', this.#player.getLevel())
+        fb.setData('level', this.#player.level)
 
         this.#scene.time.delayedCall(fireball.lifetime, this.destroySkill, [fb], this)
     }

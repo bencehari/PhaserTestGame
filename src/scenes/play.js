@@ -36,7 +36,7 @@ class Play extends Phaser.Scene {
         const enemySpeed = [40, 45, 50, 55]
 
         this.#player = new Player(this, data.lives, data.level, playerSpeed, this.#playerGroup)
-        this.cameras.main.startFollow(this.#player.getPhysicsImage())
+        this.cameras.main.startFollow(this.#player.physicsImage)
 
         this.#enemyHandler = new EnemyHandler(this, 500, 100, enemySpeed, this.#enemyGroup, this.#player)
         
@@ -83,7 +83,7 @@ class Play extends Phaser.Scene {
      */
     enemyOverlapSkill(enemy, skill) {
         const e = enemy.getData('owner')
-        const target = Phaser.Math.Clamp(fireball.baseHitChance + (skill.getData('level') - e.getLevel()) * 5, 5, 95)
+        const target = Phaser.Math.Clamp(fireball.baseHitChance + (skill.getData('level') - e.level) * 5, 5, 95)
 
         if (Phaser.Math.RND.integerInRange(0, 100) < target) {
             this.#enemyHandler.enemyKilled(e)
@@ -96,7 +96,7 @@ class Play extends Phaser.Scene {
 
     update() {
         this.#player.update()
-        const ppos = this.#player.getPosition()
+        const ppos = this.#player.position
 
         this.#background.setPosition(ppos.x, ppos.y)
         this.#background.setTilePosition(ppos.x, ppos.y)

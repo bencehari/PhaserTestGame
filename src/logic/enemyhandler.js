@@ -22,7 +22,7 @@ class EnemyHandler {
             repeat: repeatCount,
             loop: false,
             callback: function() {
-                const playerPos = player.getPosition()
+                const playerPos = player.position
                 for (let i = 0; i < 3; i++) {
                     enemies.push(
                         new Enemy(
@@ -49,7 +49,7 @@ class EnemyHandler {
 
         let i = this.#enemies.length
         while (i--) {
-            const epos = this.#enemies[i].getPosition()
+            const epos = this.#enemies[i].position
             const vec = new Phaser.Math.Vector2(epos.x - tpos.x, epos.y - tpos.y)
             const dist = vec.lengthSq()
             if (dist < minDist) {
@@ -67,7 +67,7 @@ class EnemyHandler {
     update() {
         let i = this.#enemies.length
         while (i--) {
-            this.#enemies[i].update(this.#player.getPosition())
+            this.#enemies[i].update(this.#player.position)
         }
     }
 

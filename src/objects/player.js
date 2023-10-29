@@ -28,28 +28,24 @@ class Player {
         this.#lives = lives
         this.#level = level
         this.#speed = speed
+
+        // scene.input.on('pointerdown', this.onPointerDown, this)
     }
 
     /**
      * @returns {PhysicsImage}
      */
-    getPhysicsImage() {
-        return this.#image
-    }
+    get physicsImage() { return this.#image }
 
     /**
      * @returns {integer} level
      */
-    getLevel() {
-        return this.#level
-    }
+    get level() { return this.#level }
 
     /**
      * @returns {Phaser.Types.Math.Vector2Like}
      */
-    getPosition() {
-        return { x: this.#image.x, y: this.#image.y }
-    }
+    get position() { return { x: this.#image.x, y: this.#image.y } }
 
     /**
      * @returns {integer} actual lives of player
@@ -74,22 +70,26 @@ class Player {
     }
 
     update() {
-        this.#image.body.velocity.x = 0
-        this.#image.body.velocity.y = 0
+        let vel = { x: 0, y: 0 }
 
-        if (this.#cursor.up.isDown) this.#image.body.velocity.y += -this.#speed
-        if (this.#cursor.down.isDown) this.#image.body.velocity.y += this.#speed
+        if (this.#cursor.up.isDown) vel.y += -this.#speed
+        if (this.#cursor.down.isDown) vel.y += this.#speed
         if (this.#cursor.left.isDown) {
-            this.#image.body.velocity.x += -this.#speed
+            vel.x += -this.#speed
             this.#image.flipX = true
         }
         if (this.#cursor.right.isDown) {
-            this.#image.body.velocity.x += this.#speed
+            vel.x += this.#speed
             this.#image.flipX = false
         }
 
+        this.#image.body.velocity.x = vel.x
+        this.#image.body.velocity.y = vel.y
+
         this.#image.depth = this.#image.y + this.#image.height * 0.5
     }
+
+    // onPointerDown(pointer) { }
 
     // debug
     setLives(lives) {

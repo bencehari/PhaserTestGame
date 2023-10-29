@@ -31,16 +31,12 @@ class Enemy {
     /**
      * @returns {integer} level
      */
-    getLevel() {
-        return this.#level
-    }
+    get level() { return this.#level }
 
     /**
      * @returns {Phaser.Types.Math.Vector2Like} position
      */
-    getPosition() {
-        return { x: this.#image.x, y: this.#image.y }
-    }
+    get position() { return { x: this.#image.x, y: this.#image.y } }
 
     /**
      * @param { Phaser.Types.Math.Vector2Like } playerPos
