@@ -6,7 +6,7 @@ class Init extends Phaser.Scene {
         this.#progress.setOrigin(0.5, 0.5)
         this.#progress.setAlign('center')
 
-        this.load.on('progress', this.progress, this)
+        this.load.on(Phaser.Loader.Events.PROGRESS, this.progress, this)
 
         this.load.atlas('mainatlas', '../assets/scribble_platformer_spritesheet.png', '../assets/scribble_platformer_spritesheet_atlas.json')
         this.load.atlas('secatlas', '../assets/scribble_dungeons_spritesheet.png', '../assets/scribble_dungeons_spritesheet_atlas.json')

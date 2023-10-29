@@ -25,8 +25,8 @@ class PlayUI extends Phaser.Scene {
         this.#pauseText.setOrigin(0.5, 0.5)
         this.#pauseText.setVisible(false)
 
-        this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC).on('down', this.onESCDown, this)
-        this.events.on('shutdown', this.onShutdown, this)
+        this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC).on(Phaser.Input.Keyboard.Events.DOWN, this.onESCDown, this)
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, this.onShutdown, this)
     }
 
     onPlayerHit(lives) {
@@ -57,6 +57,6 @@ class PlayUI extends Phaser.Scene {
 
     onShutdown() {
         this.#playScene.events.off('playerHit', this.onPlayerHit, this)
-        this.events.off('shutdown', this.onShutdown, this)
+        this.events.off(Phaser.Scenes.Events.SHUTDOWN, this.onShutdown, this)
     }
 }

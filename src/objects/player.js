@@ -7,6 +7,8 @@ class Player {
     #level
     #speed
 
+    #pointerDown
+
     /**
      * @param {Phaser.Scene} scene
      * @param {integer} lives
@@ -29,7 +31,9 @@ class Player {
         this.#level = level
         this.#speed = speed
 
-        // scene.input.on('pointerdown', this.onPointerDown, this)
+        scene.input.on(Phaser.Input.Events.POINTER_DOWN, this.onPointerDown, this)
+        scene.input.on(Phaser.Input.Events.POINTER_UP, this.onPointerUp, this)
+        scene.input.on(Phaser.Input.Events.POINTER_UP_OUTSIDE, this.onPointerUp, this)
     }
 
     /**
@@ -70,26 +74,43 @@ class Player {
     }
 
     update() {
-        let vel = { x: 0, y: 0 }
+        if (this.#pointerDown) {
+            let dir = new Phaser.Math.Vector2(
+                this.#scene.input.activePointer.worldX,
+                this.#scene.input.activePointer.worldY
+            )
+            dir.subtract({
+                x: this.#image.x,
+                y: this.#image.y
+            })
+            dir = dir.normalize()
 
-        if (this.#cursor.up.isDown) vel.y += -this.#speed
-        if (this.#cursor.down.isDown) vel.y += this.#speed
-        if (this.#cursor.left.isDown) {
-            vel.x += -this.#speed
-            this.#image.flipX = true
+            this.#image.body.velocity.x = dir.x * this.#speed
+            this.#image.body.velocity.y = dir.y * this.#speed
         }
-        if (this.#cursor.right.isDown) {
-            vel.x += this.#speed
-            this.#image.flipX = false
-        }
+        else {
+            let vel = { x: 0, y: 0 }
 
-        this.#image.body.velocity.x = vel.x
-        this.#image.body.velocity.y = vel.y
+            if (this.#cursor.up.isDown) vel.y += -this.#speed
+            if (this.#cursor.down.isDown) vel.y += this.#speed
+            if (this.#cursor.left.isDown) {
+                vel.x += -this.#speed
+                this.#image.flipX = true
+            }
+            if (this.#cursor.right.isDown) {
+                vel.x += this.#speed
+                this.#image.flipX = false
+            }
+
+            this.#image.body.velocity.x = vel.x
+            this.#image.body.velocity.y = vel.y
+        }
 
         this.#image.depth = this.#image.y + this.#image.height * 0.5
     }
 
-    // onPointerDown(pointer) { }
+    onPointerDown(pointer) { this.#pointerDown = true }
+    onPointerUp(pointer) { this.#pointerDown = false }
 
     // debug
     setLives(lives) {
