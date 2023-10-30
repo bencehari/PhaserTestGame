@@ -8,6 +8,7 @@ class SpellCaster {
 	/** @type {dir: Phaser.Math.Vector2, distSq: number} */ #target
 
 	#lastCastTime = 0
+	#plvlAttackSpeedBonus = 1
 
 	/**
 	 * @param {Phaser.Scene} scene
@@ -20,9 +21,19 @@ class SpellCaster {
 		this.#player = player
 		this.#enemyHandler = enemyHandler
 		this.#skillGroup = skillGroup
+
+		this.playerLevelUp()
 	}
 
-	update() {
+	// TODO: make this event-driven
+	playerLevelUp() {
+		this.#plvlAttackSpeedBonus = 1 - this.#player.level * 0.0075
+	}
+
+	update(time) {
+		if (this.#lastCastTime + fireball.castDelay * this.#plvlAttackSpeedBonus > time) return
+		this.#lastCastTime = time
+
         this.castFireball(this.#enemyHandler.getClosesEnemy(this.#player.position))
 	}
 
@@ -32,11 +43,6 @@ class SpellCaster {
 	castFireball(target) {
         if (target.dir === null) return
         else if (target.distSq > fireball.rangeSq) return
-
-		const now = this.#scene.time.now
-        if (this.#lastCastTime + fireball.castDelay > now) return
-
-        this.#lastCastTime = now
 
         const ppos = this.#player.position
 

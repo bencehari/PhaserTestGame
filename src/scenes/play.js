@@ -55,8 +55,8 @@ class Play extends Phaser.Scene {
     }
 
     onSpaceDown() {
-        this.#player.levelUp()
-        this.events.emit('playerLevelUp', this.#player.level)
+        this.events.emit('playerLevelUp', this.#player.levelUp())
+        this.#spellCaster.playerLevelUp()
     }
 
     /**
@@ -102,7 +102,7 @@ class Play extends Phaser.Scene {
         this.#spellCaster.destroySkill(skill)
     }
 
-    update() {
+    update(time, dt) {
         this.#player.update()
         const ppos = this.#player.position
 
@@ -111,6 +111,6 @@ class Play extends Phaser.Scene {
 
         this.#enemyHandler.update()
 
-        this.#spellCaster.update()
+        this.#spellCaster.update(time)
     }
 }
