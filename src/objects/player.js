@@ -112,8 +112,11 @@ class Player {
     onPointerDown(pointer) { this.#pointerDown = true }
     onPointerUp(pointer) { this.#pointerDown = false }
 
+    /**
+     * @returns {integer} new level
+     */
+    levelUp() { return ++this.#level }
+
     // debug
-    setLives(lives) {
-        this.#lives = lives
-    }
+    setLives(lives) { this.#lives = lives }
 }

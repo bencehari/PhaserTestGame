@@ -3,20 +3,27 @@ class PlayUI extends Phaser.Scene {
 
     /** @type {Img} */ #hearts = []
 
+    /** @type {Img} */ #level10
+    /** @type {Img} */ #level1
+
     /** @type {PText} */ #pauseText
 
     #paused
 
-    create(lives) {
-        for (let i = 1; i < lives + 1; i++) {
+    create(data) {
+        for (let i = 1; i < data.lives + 1; i++) {
             const h = this.add.image(10 + i * 15, i * 5 + 25, 'mainatlas', 'tile_heart')
             h.setTint(0xFF2222)
             this.#hearts.push(h)
         }
 
+        this.#level1 = this.add.image(this.game.config.width - 32, 32, 'mainatlas', `ui_num${data.level % 10}`)
+        this.#level10 = this.add.image(this.game.config.width - 64, 32, 'mainatlas', data.level > 9 ? `ui_num${Math.floor(data.level * 0.1) % 10}` : 'ui_num0')
+
         // TODO: should avoid using built-in scene events
         this.#playScene = this.scene.get('play')
         this.#playScene.events.on('playerHit', this.onPlayerHit, this)
+        this.#playScene.events.on('playerLevelUp', this.playerLevelUp, this)
 
         const textStyle = getDefaultTextStyle(30)
         textStyle.backgroundColor = '#000000'
@@ -42,6 +49,11 @@ class PlayUI extends Phaser.Scene {
         else this.#hearts[lives].setVisible(false)
     }
 
+    playerLevelUp(level) {
+        this.#level1.setTexture('mainatlas', `ui_num${level % 10}`)
+        this.#level10.setTexture('mainatlas', level > 9 ? `ui_num${Math.floor(level * 0.1) % 10}` : 'ui_num0')
+    }
+
     onESCDown() {
         if (!this.#paused) {
             this.scene.pause('play')
@@ -57,6 +69,8 @@ class PlayUI extends Phaser.Scene {
 
     onShutdown() {
         this.#playScene.events.off('playerHit', this.onPlayerHit, this)
+        this.#playScene.events.off('playerLevelUp', this.playerLevelUp, this)
+
         this.events.off(Phaser.Scenes.Events.SHUTDOWN, this.onShutdown, this)
     }
 }

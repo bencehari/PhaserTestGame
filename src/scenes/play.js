@@ -23,7 +23,7 @@ class Play extends Phaser.Scene {
             this.game.config.width, this.game.config.height,
             'grass'
         )
-        
+
         // TODO: should be something Number.NEGATIVE_MIN_VALUE
         // (Number.MIN_VALUE returns the closest number to ZERO)
         this.#background.depth = -10000
@@ -39,7 +39,7 @@ class Play extends Phaser.Scene {
         this.cameras.main.startFollow(this.#player.physicsImage)
 
         this.#enemyHandler = new EnemyHandler(this, 500, 100, enemySpeed, this.#enemyGroup, this.#player)
-        
+
         this.#spellCaster = new SpellCaster(this, this.#player, this.#enemyHandler, this.#playerSkillsGroup)
 
         this.physics.add.collider(this.#enemyGroup, this.#enemyGroup)
@@ -48,7 +48,15 @@ class Play extends Phaser.Scene {
 
         // TODO: workaround
         this.game.scene.add('playUI', PlayUI)
-        this.scene.launch('playUI', data.lives)
+        this.scene.launch('playUI', data)
+
+        // debug
+        this.SPACE_KEY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE).on(Phaser.Input.Keyboard.Events.DOWN, this.onSpaceDown, this)
+    }
+
+    onSpaceDown() {
+        this.#player.levelUp()
+        this.events.emit('playerLevelUp', this.#player.level)
     }
 
     /**
@@ -78,8 +86,8 @@ class Play extends Phaser.Scene {
     }
 
     /**
-     * @param {PhysicsImage} enemy 
-     * @param {PhysicsImage} skill 
+     * @param {PhysicsImage} enemy
+     * @param {PhysicsImage} skill
      */
     enemyOverlapSkill(enemy, skill) {
         const e = enemy.getData('owner')
