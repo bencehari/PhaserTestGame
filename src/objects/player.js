@@ -76,49 +76,45 @@ class Player {
     }
 
     update() {
+        let move
+
         if (this.#pointerDown) {
-            let dir = new Phaser.Math.Vector2(
+            move = new Phaser.Math.Vector2(
                 this.#scene.input.activePointer.worldX,
                 this.#scene.input.activePointer.worldY
             )
 
-            this.#image.flipX = dir.x < this.#image.x
+            this.#image.flipX = move.x < this.#image.x
 
-            dir.subtract({
+            move.subtract({
                 x: this.#image.x,
                 y: this.#image.y
             })
-            dir = dir.normalize()
-
-            this.#image.body.velocity.x = dir.x * this.#speed
-            this.#image.body.velocity.y = dir.y * this.#speed
         }
         else {
-            let vel = { x: 0, y: 0 }
+            move = new Phaser.Math.Vector2(0, 0)
 
-            if (this.#cursor.up.isDown) vel.y += -this.#speed
-            if (this.#cursor.down.isDown) vel.y += this.#speed
+            if (this.#cursor.up.isDown) move.y += -1
+            if (this.#cursor.down.isDown) move.y += 1
             if (this.#cursor.left.isDown) {
-                vel.x += -this.#speed
+                move.x += -1
                 this.#image.flipX = true
             }
             if (this.#cursor.right.isDown) {
-                vel.x += this.#speed
+                move.x += 1
                 this.#image.flipX = false
             }
-
-            this.#image.body.velocity.x = vel.x
-            this.#image.body.velocity.y = vel.y
         }
+
+        move = move.normalize()
+
+        this.#image.body.velocity.x = move.x * this.#speed
+        this.#image.body.velocity.y = move.y * this.#speed
 
         this.#image.depth = this.#image.y + this.#image.height * 0.5
     }
 
-    onPointerDown(pointer) {
-        this.#pointerDown = true
-        
-    }
-
+    onPointerDown(pointer) { this.#pointerDown = true }
     onPointerUp(pointer) { this.#pointerDown = false }
 
     /**
