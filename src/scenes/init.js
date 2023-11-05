@@ -1,8 +1,10 @@
+import { defaultTextStyle } from "../common.js"
+
 class Init extends Phaser.Scene {
     /** @type {PText} */ #progress
 
     preload() {
-        this.#progress = this.add.text(this.game.config.width * 0.5, this.game.config.height * 0.5, 'loading\n0%', getDefaultTextStyle(30))
+        this.#progress = this.add.text(this.game.config.width * 0.5, this.game.config.height * 0.5, 'loading\n0%', defaultTextStyle(30))
         this.#progress.setOrigin(0.5, 0.5)
         this.#progress.setAlign('center')
 
@@ -21,3 +23,5 @@ class Init extends Phaser.Scene {
         this.scene.start('mainmenu')
     }
 }
+
+export default Init

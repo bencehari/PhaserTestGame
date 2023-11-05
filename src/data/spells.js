@@ -1,8 +1,8 @@
-const SPELL = {
+export const SPELL = {
 	fireball: 0
 }
 
-const fireball = {
+export const fireball = {
 	atlas: 'secatlas',
 	frame: 'red_char',
 	castDelay: 3000,

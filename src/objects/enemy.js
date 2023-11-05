@@ -1,3 +1,5 @@
+import { g_scale } from "../globals.js"
+
 class Enemy {
     /** @type {PhysicsImage} */ #image
 
@@ -53,3 +55,5 @@ class Enemy {
         this.#image.depth = this.#image.y + this.#image.height * 0.5 + this.#depthMod
     }
 }
+
+export default Enemy

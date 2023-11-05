@@ -1,3 +1,6 @@
+import { g_scale } from "../globals.js"
+import { fireball } from "../data/spells.js"
+
 class SpellCaster {
 	/** @type {Phaser.Scene} */ #scene
 
@@ -64,3 +67,5 @@ class SpellCaster {
         skill.destroy()
     }
 }
+
+export default SpellCaster

@@ -1,3 +1,5 @@
+import { g_scale } from "../globals.js"
+
 class Player {
     /** @type {Phaser.Scene} */ #scene
     /** @type {CursorKeys} */ #cursor
@@ -79,6 +81,9 @@ class Player {
                 this.#scene.input.activePointer.worldX,
                 this.#scene.input.activePointer.worldY
             )
+
+            this.#image.flipX = dir.x < this.#image.x
+
             dir.subtract({
                 x: this.#image.x,
                 y: this.#image.y
@@ -109,7 +114,11 @@ class Player {
         this.#image.depth = this.#image.y + this.#image.height * 0.5
     }
 
-    onPointerDown(pointer) { this.#pointerDown = true }
+    onPointerDown(pointer) {
+        this.#pointerDown = true
+        
+    }
+
     onPointerUp(pointer) { this.#pointerDown = false }
 
     /**
@@ -120,3 +129,5 @@ class Player {
     // debug
     setLives(lives) { this.#lives = lives }
 }
+
+export default Player

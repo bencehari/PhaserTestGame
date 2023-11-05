@@ -1,3 +1,5 @@
+import { defaultTextStyle } from "../common.js"
+
 class PlayUI extends Phaser.Scene {
     /** @type {Phaser.Scene} */ #playScene
 
@@ -25,7 +27,7 @@ class PlayUI extends Phaser.Scene {
         this.#playScene.events.on('playerHit', this.onPlayerHit, this)
         this.#playScene.events.on('playerLevelUp', this.playerLevelUp, this)
 
-        const textStyle = getDefaultTextStyle(30)
+        const textStyle = defaultTextStyle(30)
         textStyle.backgroundColor = '#000000'
 
         this.#pauseText = this.add.text(this.game.config.width * 0.5, this.game.config.height * 0.5, ' game paused ', textStyle)
@@ -74,3 +76,5 @@ class PlayUI extends Phaser.Scene {
         this.events.off(Phaser.Scenes.Events.SHUTDOWN, this.onShutdown, this)
     }
 }
+
+export default PlayUI

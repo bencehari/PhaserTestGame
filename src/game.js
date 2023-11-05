@@ -1,3 +1,7 @@
+import Init from "./scenes/init.js"
+import MainMenu from "./scenes/mainmenu.js"
+import Play from "./scenes/play.js"
+
 const physicsDebug = {
     debug: true,
     debugShowBody: true,
@@ -34,6 +38,5 @@ const game = new Phaser.Game({
 game.scene.add('init', Init)
 game.scene.add('mainmenu', MainMenu)
 game.scene.add('play', Play)
-// game.scene.add('playUI', PlayUI)
 
 game.scene.start('init')

@@ -1,10 +1,12 @@
+import { defaultTextStyle } from "../common.js"
+
 class MainMenu extends Phaser.Scene {
     /** @type {Key} */ #spaceBar
 
     create() {
         this.#spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        const text = this.add.text(this.game.config.width * 0.5, this.game.config.height * 0.5, 'press space to start game', getDefaultTextStyle(30))
+        const text = this.add.text(this.game.config.width * 0.5, this.game.config.height * 0.5, 'press space to start game', defaultTextStyle(30))
         text.setOrigin(0.5, 0.5)
 
         // this.printPlayerLevelXPReqs()
@@ -30,3 +32,5 @@ class MainMenu extends Phaser.Scene {
         }
     }
 }
+
+export default MainMenu

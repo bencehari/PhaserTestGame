@@ -1,1 +1,1 @@
-const g_scale = 0.75
+export const g_scale = 0.75

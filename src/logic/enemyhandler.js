@@ -1,3 +1,5 @@
+import Enemy from "../objects/enemy.js"
+
 class EnemyHandler {
     /** @type {Player} */ #player
 
@@ -84,3 +86,5 @@ class EnemyHandler {
         }
     }
 }
+
+export default EnemyHandler

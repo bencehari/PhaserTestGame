@@ -1,3 +1,9 @@
+import PlayUI from "./playUI.js"
+import Player from "../objects/player.js"
+import EnemyHandler from "../logic/enemyhandler.js"
+import SpellCaster from "../logic/spellcaster.js"
+import { fireball } from "../data/spells.js"
+
 class Play extends Phaser.Scene {
     /** @type {TileSprite} */ #background
 
@@ -114,3 +120,5 @@ class Play extends Phaser.Scene {
         this.#spellCaster.update(time)
     }
 }
+
+export default Play
