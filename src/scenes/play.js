@@ -119,7 +119,7 @@ class Play extends Phaser.Scene {
 
         this.#enemyHandler.update()
 
-        this.#spellCaster.update(time)
+        this.#spellCaster.update(time, dt)
     }
 }
 

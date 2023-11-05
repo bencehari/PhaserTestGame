@@ -13,6 +13,7 @@ class SpellCaster {
 	/** @type {dir: Phaser.Math.Vector2, distSq: number} */ #target
 
 	#lastCastTime = 0
+	#time = 0
 	#plvlAttackSpeedBonus = 1
 
 	/**
@@ -35,9 +36,11 @@ class SpellCaster {
 		this.#plvlAttackSpeedBonus = 1 - this.#player.level * 0.0075
 	}
 
-	update(time) {
-		if (this.#lastCastTime + fireball.castDelay * this.#plvlAttackSpeedBonus > time) return
-		this.#lastCastTime = time
+	update(time, dt) {
+		this.#time += dt
+
+		if (this.#lastCastTime + fireball.castDelay * this.#plvlAttackSpeedBonus > this.#time) return
+		this.#lastCastTime = this.#time
 
         this.castFireball(this.#enemyHandler.getClosesEnemy(this.#player.position))
 	}
