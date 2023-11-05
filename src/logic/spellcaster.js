@@ -1,3 +1,5 @@
+"use strict"
+
 import { g_scale } from "../globals.js"
 import { fireball } from "../data/spells.js"
 

@@ -1,3 +1,5 @@
+"use strict"
+
 import Init from "./scenes/init.js"
 import MainMenu from "./scenes/mainmenu.js"
 import Play from "./scenes/play.js"

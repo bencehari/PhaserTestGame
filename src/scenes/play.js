@@ -1,3 +1,5 @@
+"use strict"
+
 import PlayUI from "./playUI.js"
 import Player from "../objects/player.js"
 import EnemyHandler from "../logic/enemyhandler.js"

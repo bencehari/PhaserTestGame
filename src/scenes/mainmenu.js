@@ -1,3 +1,5 @@
+"use strict"
+
 import { defaultTextStyle } from "../common.js"
 
 class MainMenu extends Phaser.Scene {

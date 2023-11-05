@@ -1,3 +1,5 @@
+"use strict"
+
 import Enemy from "../objects/enemy.js"
 
 class EnemyHandler {

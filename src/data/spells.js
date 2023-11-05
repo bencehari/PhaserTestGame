@@ -1,3 +1,5 @@
+"use strict"
+
 export const SPELL = {
 	fireball: 0
 }
