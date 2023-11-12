@@ -54,7 +54,6 @@ class Play extends Phaser.Scene {
         this.physics.add.overlap(this.#playerGroup, this.#enemyGroup, this.enemyOverlapPlayer, null, this)
         this.physics.add.overlap(this.#enemyGroup, this.#playerSkillsGroup, this.enemyOverlapSkill, null, this)
 
-        // TODO: workaround
         this.game.scene.add('playUI', PlayUI)
         this.scene.launch('playUI', data)
 
@@ -64,7 +63,6 @@ class Play extends Phaser.Scene {
 
     onSpaceDown() {
         this.events.emit('playerLevelUp', this.#player.levelUp())
-        this.#spellCaster.playerLevelUp()
     }
 
     /**

@@ -3,14 +3,15 @@
 import { g_scale } from "../globals.js"
 import { fireball } from "../data/spells.js"
 
+import Player from "../objects/player.js"
+import EnemyHandler from "./enemyhandler.js"
+
 class SpellCaster {
 	/** @type {Phaser.Scene} */ #scene
 
 	/** @type {Player} */ #player
 	/** @type {EnemyHandler} */ #enemyHandler
 	/** @type {PhysicsGroup} */ #skillGroup
-
-	/** @type {dir: Phaser.Math.Vector2, distSq: number} */ #target
 
 	#lastCastTime = 0
 	#time = 0
@@ -28,12 +29,12 @@ class SpellCaster {
 		this.#enemyHandler = enemyHandler
 		this.#skillGroup = skillGroup
 
-		this.playerLevelUp()
+		scene.events.on('playerLevelUp', this.onPlayerLevelUp, this)
+		this.onPlayerLevelUp(player.level)
 	}
 
-	// TODO: make this event-driven
-	playerLevelUp() {
-		this.#plvlAttackSpeedBonus = 1 - this.#player.level * 0.0075
+	onPlayerLevelUp(level) {
+		this.#plvlAttackSpeedBonus = 1 - level * 0.0075
 	}
 
 	update(time, dt) {
